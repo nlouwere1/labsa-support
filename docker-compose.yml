@@ -1,0 +1,50 @@
+version: '2'
+
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - data:/var/lib/postgres/data
+    environment:
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: some_password
+      POSTGRES_DB: guacamole_db
+
+  guacd:
+    image: guacamole/guacd
+    restart: always
+
+  guacamole-web:
+    image: guacamole/guacamole
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_DATABASE: guacamole_db
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: some_password
+      GUACD_PORT_4822_TCP_ADDR: guacd
+      GUACD_PORT_4822_TCP_PORT: 4822
+    links:
+      - guacd:guacd
+      - postgres:postgres
+
+  webserver:
+    image: httpd
+    restart: always
+    volumes:
+      - $PWD/web/htdocs:/usr/local/apache2/htdocs
+      - $PWD/web/conf:/usr/local/apache2/conf
+      - $PWD/web/error:/usr/local/apache2/error
+      - $PWD/web/logs:/usr/local/apache2/logs
+    ports:
+      - "80:80"
+
+volumes:
+  data:
+    driver: local
