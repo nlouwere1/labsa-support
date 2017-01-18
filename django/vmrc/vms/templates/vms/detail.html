@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'vms/style.css' %}" />
+<h1>{{ server.server_text }}</h1>
+
+<ul>
+<table border="1" style="width:100%">
+ <tr>
+ <th>VMRC</th>
+ <th>CPU</th>
+ <th>MEM(gb)</th>
+ <th>Ip Address</th>
+ <th>OS</th>
+ </tr>
+{% for vms in server.vms_set.all %}
+<tr>
+	{% if vms.run == 'y' %}
+    	<td><span class="up"><a href="vmrc://{{server.IP_addr}}:443/?moid={{vms.moid}}">{{ vms.vm_text }}</a></span> </td>
+    {% else %}
+    	<td><span class="down"><a href="vmrc://{{server.IP_addr}}:443/?moid={{vms.moid}}">{{ vms.vm_text }}</a></span> </td>
+    {% endif %}
+    <td>{{vms.CPU}}</td>
+    <td>{{vms.Mem}}</td>
+    <td>{{vms.Ipa}}</td>
+    <td>{{vms.Guest}}</td>
+</tr>
+{% endfor %}
+<br>
+<a href="/vms/">back</a>
+</ul>

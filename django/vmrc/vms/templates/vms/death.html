@@ -1,0 +1,10 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'vms/style.css' %}" />
+<h1>{{ server.server_text }}</h1>
+
+<ul>
+The server {{ server.server_text }} is not reponding
+<br>
+<a href="/vms/">back</a>
+</ul>

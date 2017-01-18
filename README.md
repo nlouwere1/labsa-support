@@ -13,3 +13,5 @@ optional but fun
 	chmod a+x /usr/local/bin/scope
 	scope launch 
 	http://{{ip}}:4040 (or just go to ip)
+
+have an error in the django file admin site is http://{{ip}}:8000/admin/

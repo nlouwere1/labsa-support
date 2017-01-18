@@ -1,0 +1,12 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'vms/style.css' %}" />
+<h1>{{ server.server_text }}</h1>
+
+<ul>
+{% for vms in server.vms_set.all %}
+    <li><a href="vmrc://{{server.IP_addr}}:443/?moid={{vms.moid}}">{{ vms.vm_text }}</a> </li>
+{% endfor %}
+<br>
+<a href="/vms/">back</a>
+</ul>

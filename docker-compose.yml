@@ -45,6 +45,14 @@ services:
     ports:
       - "80:80"
 
+  django:
+     build: $PWD/django/.
+     command: python manage.py runserver 0.0.0.0:8000
+     volumes:
+       - $PWD/django/vmrc/:/code
+     ports:
+       - "8000:8000"
+
 volumes:
   data:
     driver: local

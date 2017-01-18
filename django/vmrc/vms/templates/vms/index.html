@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'vms/style.css' %}" />
+
+{% if latest_server_list %}
+    <ul>
+    {% for server in latest_server_list %}
+    	{% if server.up == 'y' %}
+           <li><a href="/vms/vms/{{ server.id }}/refresh/"> <img src="{% static "vms/images/download.jpeg" %}" alt="refresh" height="10" width="10"> </a>  <span class="up"><a href="/vms/vms/{{ server.id }}/">{{ server.server_text }}</a></span><font size="1"><b>({{server.IP_addr}})</b></font> </li>
+    	{% else %}
+    	   <li><span class="down"><a href="/vms/{{ server.id }}/">{{ server.server_text }}</a> </span><font size="1"><b>({{server.IP_addr}})</b></font></li>
+    	{% endif %}
+    {% endfor %}
+    <br>
+    <a href="/vms/admin/">Admin site</a> (requires login admin,nicodelouwere)
+    </ul>
+{% else %}
+    <p>No servers are available.</p>
+     <br>
+    <a href="/vms/admin/">Admin site</a> (requires login admin,nicodelouwere)
+{% endif %}

@@ -1,0 +1,15 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'vms/style.css' %}" />
+
+{% if latest_server_list %}
+    <ul>
+    {% for server in latest_server_list %}
+        <li><a href="/vms/{{ server.id }}/">{{ server.server_text }}</a> <font size="1"><b>({{server.IP_addr}})</b></font></li>
+    {% endfor %}
+    <br>
+    <a href="/admin/">Admin site</a> (requires login admin,nicodelouwere)
+    </ul>
+{% else %}
+    <p>No servers are available.</p>
+{% endif %}

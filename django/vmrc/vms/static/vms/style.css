@@ -1,0 +1,19 @@
+li a {
+    color: blue;
+}
+a:visited {
+    color: blue;
+}
+body {
+    background-color: white;
+}
+
+h1 {
+    color: magenta ;
+    margin-left: 20px;
+}
+
+.up { background-color:green;}
+.down { background-color:red;}
+.pause { background-color:yellow;}
+
